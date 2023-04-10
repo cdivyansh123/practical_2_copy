@@ -7,7 +7,9 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
+
   $UsersTable(this.attachedDatabase, [this._alias]);
+
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -32,12 +34,16 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   late final GeneratedColumn<String> gender = GeneratedColumn<String>(
       'gender', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+
   @override
   List<GeneratedColumn> get $columns => [id, name, number, gender];
+
   @override
   String get aliasedName => _alias ?? 'users';
+
   @override
   String get actualTableName => 'users';
+
   @override
   VerificationContext validateIntegrity(Insertable<User> instance,
       {bool isInserting = false}) {
@@ -69,6 +75,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
 
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
+
   @override
   User map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -95,11 +102,13 @@ class User extends DataClass implements Insertable<User> {
   final String name;
   final String number;
   final String gender;
+
   const User(
       {required this.id,
       required this.name,
       required this.number,
       required this.gender});
+
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -129,6 +138,7 @@ class User extends DataClass implements Insertable<User> {
       gender: serializer.fromJson<String>(json['gender']),
     );
   }
+
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
@@ -147,6 +157,7 @@ class User extends DataClass implements Insertable<User> {
         number: number ?? this.number,
         gender: gender ?? this.gender,
       );
+
   @override
   String toString() {
     return (StringBuffer('User(')
@@ -160,6 +171,7 @@ class User extends DataClass implements Insertable<User> {
 
   @override
   int get hashCode => Object.hash(id, name, number, gender);
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -175,12 +187,14 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<String> name;
   final Value<String> number;
   final Value<String> gender;
+
   const UsersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.number = const Value.absent(),
     this.gender = const Value.absent(),
   });
+
   UsersCompanion.insert({
     this.id = const Value.absent(),
     required String name,
@@ -189,6 +203,7 @@ class UsersCompanion extends UpdateCompanion<User> {
   })  : name = Value(name),
         number = Value(number),
         gender = Value(gender);
+
   static Insertable<User> custom({
     Expression<int>? id,
     Expression<String>? name,
@@ -249,9 +264,11 @@ class UsersCompanion extends UpdateCompanion<User> {
 abstract class _$Appdb extends GeneratedDatabase {
   _$Appdb(QueryExecutor e) : super(e);
   late final $UsersTable users = $UsersTable(this);
+
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [users];
 }

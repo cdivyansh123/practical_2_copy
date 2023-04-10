@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 // ignore: must_be_immutable
 class UserTextField extends StatelessWidget {
   UserTextField({
@@ -11,11 +10,13 @@ class UserTextField extends StatelessWidget {
     required this.hintText,
     required this.label,
   });
+
   TextInputType keyBordType;
   TextEditingController controller;
   String filed;
   String hintText;
   String label;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,11 +38,10 @@ class UserTextField extends StatelessWidget {
               keyboardType: keyBordType,
               controller: controller,
               cursorColor: Colors.black,
-              decoration:  InputDecoration(
+              decoration: InputDecoration(
                 hintText: hintText,
                 label: Text(label),
-                contentPadding:
-                const EdgeInsets.only(left: 10, top: 5),
+                contentPadding: const EdgeInsets.only(left: 10, top: 5),
                 border: const OutlineInputBorder(),
                 fillColor: Colors.red,
               ),
